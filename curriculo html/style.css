@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+html{
+    scroll-behavior: smooth; /*suaviza a rolagem*/
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(https://www.publicdomainpictures.net/pictures/390000/nahled/regenbogen-farben-hintergrund-bunt.jpg);
+    background-size: cover;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-family: "Josefin Sans", sans-serif;
+}
+
+section{
+    text-align: center;
+    background-color: white;
+    width: 500px;
+    margin: auto; /* certralizar conteúdo */
+    border: 1px solid gray;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 7px black;
+   opacity: 0.8;
+
+}
+
+section:hover{
+    background-color: gainsboro;
+}
+
+ul li{
+   list-style: none;
+   text-align: left;
+}
+
+ul{
+    list-style: none;    /* tira ponto da lista*/
+    text-align: left;    /*alinha a lista para a esquerda*/
+}
+
+/*referenciando a classe links do HTML*/
+.links{
+    color: #000000; /*cor da letra*/
+    text-decoration: none;
+}
+.links:hover{
+    color: rgb(255, 0, 157);
+    font-size: 18px;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.menu{
+    background: linear-gradient(rgb(255, 0, 221), rgb(147, 5, 190), rgb(35, 12, 240));
+    
+}
+
+.menu ul{
+    text-align: center;
+    margin-top: 0 ;
+}
+
+.menu ul li{
+    display: inline-block;
+    padding: 10px;
+   
+}
+
+.menu a{
+    color: rgba(255, 255, 255, 0.829);
+    text-decoration: none;
+    
+}
