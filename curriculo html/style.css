@@ -9,7 +9,6 @@ body{
     padding: 0;
     background-image: url(https://www.publicdomainpictures.net/pictures/390000/nahled/regenbogen-farben-hintergrund-bunt.jpg);
     background-size: cover;
-    text-align: center;
     color: rgb(0, 0, 0);
     font-family: "Josefin Sans", sans-serif;
 }
@@ -77,4 +76,61 @@ header{
     color: rgba(255, 255, 255, 0.829);
     text-decoration: none;
     
+}
+
+#logo{
+    width: 20px;
+    margin-bottom: -5px;
+}
+
+footer{
+    background-color: #7e4b96b2;  /*cor de fundo*/
+    color: white;               /*cor da letra*/
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    border-top: 1px solid blue;
+}
+
+.celular{
+    display: none;
+    color:white;
+}
+
+/* adaptação para o celular - reponsividade*/
+@media (max-width: 830px){
+    .celular{
+        display: block;
+        padding-top: 10px;
+        padding-left: 10px;
+        font-size: 30px;
+    }
+    .opcoes{
+        display: none; /*desaparece lista do menu */
+    }
+
+    section{
+        font-size: 14px;
+        max-width: 400px;
+    }
+
+    iframe{
+        width: 299px;
+    }
+
+    .menu{
+        height: 65px;
+    }
+
+    /* classes mostrar menu faz aparecer a lista de menu */
+    .mostrarMenu{
+       display: grid;
+       background-color: rgba(155, 10, 199, 0.822);
+       border-radius: 0px  0px 60px 60px ;
+    
+    }
+
+
+
+
 }
