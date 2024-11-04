@@ -40,6 +40,8 @@
     background: linear-gradient(to right, rgb(0, 0, 0),#07414d);
 }
 
+
+/* menu da tela principal */
 .menu{
     background-color: rgb(3, 29, 20);
     height: 100vh;
@@ -65,4 +67,11 @@
     .menu{
         display: none;
     }
+}
+/* menu da tela principal */
+
+.card{
+margin-top: 15px;
+padding: 10px;
+margin: 25px;
 }
