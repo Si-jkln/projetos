@@ -1,0 +1,78 @@
+/* edição de cor do botão de enviar do login */
+.color{
+    border-color: #07414d;
+    color: #07414d;
+}
+
+.color:hover{
+    background-color: #07414d;
+
+}
+/* edição de cor do botão de enviar do login */
+.painel{
+    box-shadow: 2px 2px 10px;
+    background-color: white;
+    width: 350px;
+    margin: auto;
+    padding: 30px;
+    margin-top: 32vh;
+    border-radius: 10px;
+
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.cabecalho-login{
+    text-align: center;
+    font-size: 40px;
+    margin: 20px;
+    color: #07414d;
+}
+
+.cabecalho-login h3{
+    margin: 20px;
+}
+
+.navColor{
+    background: linear-gradient(to right, rgb(0, 0, 0),#07414d);
+}
+
+
+/* menu da tela principal */
+.menu{
+    background-color: rgb(3, 29, 20);
+    height: 100vh;
+    list-style: none;
+
+}
+
+.menu_item{
+    display: block;
+    color: white;
+    padding: 10px 0px;
+    
+}
+
+.menu_item:hover{
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    transition: 0.4s;
+}
+
+@media(max-width:768px ){
+    .menu{
+        display: none;
+    }
+}
+/* menu da tela principal */
+
+.card{
+margin-top: 15px;
+padding: 10px;
+margin: 27px;
+}
+
