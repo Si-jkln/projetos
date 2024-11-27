@@ -4,6 +4,8 @@
 
 include "validacao.php";
 
+include "conexao.php";
+
 ?>
 
 <head>
@@ -49,8 +51,9 @@ include "validacao.php";
       <a class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
-        <a href="./sair.php" class="btn btn-outline-light my-2 my-sm-0 ml-2"> <i class="fa-solid fa-right-from-bracket fa-sm"></i> </a>
-      </form>
+        <a href="./sair.php" class="btn btn-outline-light my-2 my-sm-0 ml-2"> <i
+            class="fa-solid fa-right-from-bracket fa-sm"></i> </a>
+        </form>
     </div>
   </nav>
 
@@ -84,17 +87,17 @@ include "validacao.php";
 
               <div class="form-group">
                 <label>Nome: </label>
-                <input type="text" name="nome" class="form-control" placeholder="Seu Nome">
+                <input type="text" name="nome" required class="form-control" placeholder="Seu Nome">
               </div>
 
               <div class="form-group">
                 <label>CPF: </label>
-                <input type="text" name="cpf" class="form-control cpf" placeholder="CPF">
+                <input type="text" name="cpf" required class="form-control cpf" placeholder="CPF">
               </div>
 
               <div class="form-group">
                 <label>Senha: </label>
-                <input type="password" name="senha" class="form-control" placeholder="Senha">
+                <input type="password" name="senha" required class="form-control" placeholder="Senha">
               </div>
 
               <button type="submit" class="btn btn-outline-info color">Cadastrar</button>
@@ -113,15 +116,27 @@ include "validacao.php";
                 </tr>
               </thead>
               <tbody>
+
+                <?php
+                  $sql = 'SELECT * FROM usuario';
+                  $resultado = mysqli_query($conexao, $sql);
+
+                  //looping que vai imprimar cada pessoa na tabela
+                  while ($colunas = mysqli_fetch_assoc($resultado)) {
+                
+                ?>
+
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Ayla Sofia</td>
-                  <td>123.123.123-12</td>
+                  <th scope="row"> <?php echo $colunas ['id'] ?> </th>
+                  <td> <?php echo $colunas ['nome'] ?></td>
+                  <td> <?php echo $colunas ['cpf'] ?></td>
                   <td>
-                    <a href=""> <i class="fa-solid fa-pencil mr-3" style="color: #07414d;"> </i></a>
-                    <a href=""> <i class="fa-solid fa-trash-can" style="color: #970707;"></i> </i></a>
+                    <a href=""> <i class="fa-solid fa-pencil mr-3" style="color: #07414d;"></i></a>
+                    <a href="<?php echo './usuario/excluir.php?id='.$colunas['id']; ?>"> <i class="fa-solid fa-trash-can" style="color: #970707;"></i></a>
                   </td>
                 </tr>
+              <?php } ?>
+
               </tbody>
             </table>
           </div>
