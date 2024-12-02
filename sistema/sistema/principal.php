@@ -3,8 +3,28 @@
 <?php
 
 include "validacao.php";
-
 include "conexao.php";
+
+//destino do formulário
+$destino = './usuario/inserir.php';
+
+//se variavel idAlt for diferente de vazio na url -  se existir a variavel idAlt na URL
+if (!empty($_GET['idAlt'])) {
+  $id = $_GET['idAlt'];
+  $sql = "SELECT * FROM usuario WHERE id='$id' ";
+
+  //busca os usuario para editar de acordo com o id
+  $dados = mysqli_query($conexao, $sql);
+
+  //separa os dados po coluna, pronto para uso
+  $dadosAlt = mysqli_fetch_assoc($dados);
+
+  //nessecaso o formulario vei enviar os dados para o alterar.php
+  $destino = './usuario/alterar.php';
+
+
+}
+
 
 ?>
 
@@ -23,51 +43,14 @@ include "conexao.php";
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-light navColor">
-    <a class="navbar-brand" href="#"><i class="fa-solid fa-chalkboard-user fa-sm"></i></i></i> Sistema Senac</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
-      aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Ação</a>
-            <a class="dropdown-item" href="#">Outra ação</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Algo mais aqui</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Desativado</a>
-        </li>
-      </ul>
-      <a class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Pesquisar</button>
-        <a href="./sair.php" class="btn btn-outline-light my-2 my-sm-0 ml-2"> <i
-            class="fa-solid fa-right-from-bracket fa-sm"></i> </a>
-        </form>
-    </div>
-  </nav>
+<?php include './menuSuperior.php';?>
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-2 menu">
-        <ul class="menu">
-          <li style="color:white"> Bem vindo(a) <?php echo $_SESSION['usuario'] ?> </li>
 
-          <li> <a href="./principa.php" class="menu_item"><i class="fa-solid fa-user"></i> Usuário </a> </li>
-          <li> <a href="./cidade.php" class="menu_item"><i class="fa-solid fa-house"></i> Cidade </a> </li>
-          <li> <a href="./funcionario.php" class="menu_item"><i class="fa-solid fa-user-gear"></i> Funcionario </a></li>
-          <li> <a href="./sair.php" class="menu_item"><i class="fa-solid fa-right-to-bracket"></i> Sair </a> </li>
-        </ul>
+       <?php include './menuLateral.php'; ?>
+       
       </div>
 
 
@@ -78,29 +61,33 @@ include "conexao.php";
           <div class="col-md-4 card">
             <h3>Cadastro</h3>
 
-            <form action="./usuario/inserir.php" method="post">
+            <form action="<?= $destino ?>" method="post">
 
               <div class="form-group">
                 <label>ID: </label>
-                <input type="text" name="id" class="form-control" placeholder="Seu ID">
+                <input readonly value="<?php echo isset($dadosAlt) ? $dadosAlt['id'] : '' ?>" type="text" name="id"
+                  class="form-control" placeholder="Seu ID">
               </div>
 
               <div class="form-group">
                 <label>Nome: </label>
-                <input type="text" name="nome" required class="form-control" placeholder="Seu Nome">
+                <input value="<?php echo isset($dadosAlt) ? $dadosAlt['nome'] : '' ?>" type="text" name="nome" required
+                  class="form-control" placeholder="Seu Nome">
               </div>
 
               <div class="form-group">
                 <label>CPF: </label>
-                <input type="text" name="cpf" required class="form-control cpf" placeholder="CPF">
+                <input value="<?php echo isset($dadosAlt) ? $dadosAlt['cpf'] : '' ?>" type="text" name="cpf" required
+                  class="form-control cpf" placeholder="CPF">
               </div>
 
               <div class="form-group">
                 <label>Senha: </label>
-                <input type="password" name="senha" required class="form-control" placeholder="Senha">
+                <input value="<?php echo isset($dadosAlt) ? $dadosAlt['senha'] : '' ?>" type="password" name="senha"
+                  required class="form-control" placeholder="Senha">
               </div>
 
-              <button type="submit" class="btn btn-outline-info color">Cadastrar</button>
+              <button type="submit" class="btn btn-outline-info color"> Salvar </button>
             </form>
 
           </div>
@@ -118,24 +105,27 @@ include "conexao.php";
               <tbody>
 
                 <?php
-                  $sql = 'SELECT * FROM usuario';
-                  $resultado = mysqli_query($conexao, $sql);
 
-                  //looping que vai imprimar cada pessoa na tabela
-                  while ($colunas = mysqli_fetch_assoc($resultado)) {
-                
-                ?>
+                $sql = 'SELECT * FROM usuario';
+                $resultado = mysqli_query($conexao, $sql);
 
-                <tr>
-                  <th scope="row"> <?php echo $colunas ['id'] ?> </th>
-                  <td> <?php echo $colunas ['nome'] ?></td>
-                  <td> <?php echo $colunas ['cpf'] ?></td>
-                  <td>
-                    <a href=""> <i class="fa-solid fa-pencil mr-3" style="color: #07414d;"></i></a>
-                    <a href="<?php echo './usuario/excluir.php?id='.$colunas['id']; ?>"> <i class="fa-solid fa-trash-can" style="color: #970707;"></i></a>
-                  </td>
-                </tr>
-              <?php } ?>
+                //looping que vai imprimar cada pessoa na tabela
+                while ($colunas = mysqli_fetch_assoc($resultado)) {
+
+                  ?>
+
+                  <tr>
+                    <th scope="row"> <?php echo $colunas['id'] ?> </th>
+                    <td> <?php echo $colunas['nome'] ?></td>
+                    <td> <?php echo $colunas['cpf'] ?></td>
+                    <td>
+                      <a href="principal.php?idAlt=<?= $colunas['id'] ?>"> <i class="fa-solid fa-pencil mr-3"
+                          style="color: #07414d;"></i></a>
+                      <a href="<?php echo './usuario/excluir.php?id=' . $colunas['id']; ?>"> <i
+                          class="fa-solid fa-trash-can" style="color: #970707;"></i></a>
+                    </td>
+                  </tr>
+                <?php } ?>
 
               </tbody>
             </table>

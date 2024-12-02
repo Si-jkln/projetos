@@ -8,7 +8,7 @@
 
     $resultado = mysqli_query($conexao, $sql);
 
-    header("location:../principal.php");
+    header('location:../principal.php');
 
                                                                 
 ?>
