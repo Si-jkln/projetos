@@ -6,24 +6,25 @@ include "validacao.php";
 include "conexao.php";
 
 //destino do formulário
-$destino = './usuario/inserir.php';
+$destino = './recrutamento/inserir.php';
 
 //se variavel idAlt for diferente de vazio na url -  se existir a variavel idAlt na URL
 if (!empty($_GET['idAlt'])) {
   $id = $_GET['idAlt'];
-  $sql = "SELECT * FROM usuario WHERE id='$id' ";
+  $sql = "SELECT * FROM recrutamento WHERE id='$id' ";
 
-  //busca os usuario para editar de acordo com o id
+  //busca os recrutamento para editar de acordo com o id
   $dados = mysqli_query($conexao, $sql);
 
   //separa os dados po coluna, pronto para uso
   $dadosAlt = mysqli_fetch_assoc($dados);
 
-  //nessecaso o formulario vei enviar os dados para o alterar.php
-  $destino = './usuario/alterar.php';
+  //nesse caso o formulario vei enviar os dados para o alterar.php
+  $destino = './recrutamento/alterar.php';
 
 
 }
+
 
 ?>
 
@@ -75,15 +76,15 @@ if (!empty($_GET['idAlt'])) {
               </div>
 
               <div class="form-group">
-                <label>CPF: </label>
-                <input value="<?php echo isset($dadosAlt) ? $dadosAlt['cpf'] : '' ?>" type="text" name="cpf" required
-                  class="form-control cpf" placeholder="CPF">
+                <label>Contato: </label>
+                <input value="<?php echo isset($dadosAlt) ? $dadosAlt['contato'] : '' ?>" type="text" name="contato" required
+                  class="form-control tel" placeholder="Contato">
               </div>
 
               <div class="form-group">
-                <label>Senha: </label>
-                <input value="<?php echo isset($dadosAlt) ? $dadosAlt['senha'] : '' ?>" type="password" name="senha"
-                  required class="form-control" placeholder="Senha">
+                <label>Email: </label>
+                <input value="<?php echo isset($dadosAlt) ? $dadosAlt['email'] : '' ?>" type="text" name="email"
+                  required class="form-control" placeholder="Email">
               </div>
 
               <button type="submit" class="btn btn-outline-info color"> Salvar </button>
@@ -97,7 +98,8 @@ if (!empty($_GET['idAlt'])) {
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">Nome</th>
-                  <th scope="col">CPF</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Horá de ínicio</th>
                   <th scope="col">Opções</th>
                 </tr>
               </thead>
@@ -105,7 +107,7 @@ if (!empty($_GET['idAlt'])) {
 
                 <?php
 
-                $sql = 'SELECT * FROM usuario';
+                $sql = 'SELECT * FROM recrutamento';
                 $resultado = mysqli_query($conexao, $sql);
 
                 //looping que vai imprimar cada pessoa na tabela
@@ -116,11 +118,12 @@ if (!empty($_GET['idAlt'])) {
                   <tr>
                     <th scope="row"> <?php echo $colunas['id'] ?> </th>
                     <td> <?php echo $colunas['nome'] ?></td>
-                    <td> <?php echo $colunas['cpf'] ?></td>
+                    <td> <?php echo $colunas['data_entrevista'] ?></td>
+                    <td> <?php echo $colunas['hora_inicio'] ?></td>
                     <td>
-                      <a href="principal.php?idAlt=<?= $colunas['id'] ?>"> <i class="fa-solid fa-pencil mr-3"
+                      <a href="recrutamento.php?idAlt=<?= $colunas['id'] ?>"> <i class="fa-solid fa-pencil mr-3"
                           style="color: #07414d;"></i></a>
-                      <a href="<?php echo './usuario/excluir.php?id=' . $colunas['id']; ?>"> <i
+                      <a href="<?php echo './recrutamento/excluir.php?id=' . $colunas['id']; ?>"> <i
                           class="fa-solid fa-trash-can" style="color: #970707;"></i></a>
                     </td>
                   </tr>
