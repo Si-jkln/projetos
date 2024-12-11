@@ -140,7 +140,7 @@ if (!empty($_GET['idAlt'])) {
             <table class="table table-striped table-bordered" id="tabela">
               <thead>
                 <tr>
-                  <th scope="col">ID</th>
+                  <th scope="col">Foto</th>
                   <th scope="col">Nome</th>
                   <th scope="col">Data</th>
                   <th scope="col">Horá de ínicio</th>
@@ -160,12 +160,20 @@ if (!empty($_GET['idAlt'])) {
                   ?>
 
                   <tr>
-                    <th scope="row"> <?php echo $colunas['id'] ?> </th>
+                    <th scope="row"> <img src="<?php echo $colunas['foto'] ?>" width="80"> </th>
                     <td> <?php echo $colunas['nome'] ?></td>
-                    <td> <?php echo $colunas['data_entrevista'] ?></td>
+
+                    <td> <?php 
+                      $data = new DateTime($colunas['data_entrevista']);
+                      echo $data->format('d/m/Y')
+                    ?></td>
+
                     <td> <?php echo $colunas['hora_inicio'] ?></td>
                     <td>
-                      <a href="recrutamento.php?idAlt=<?= $colunas['id'] ?>"> <i class="fa-solid fa-pencil mr-3"
+                      <a target="_blanck" href="<?php echo $colunas['curriculo']?>"> <i class="fa-regular fa-file-pdf fa-lg mr-2"></i> </a>
+                      <a download href="<?php echo $colunas['curriculo']?>"> <i class="fa-solid fa-download mr-2" style="color: #1d861f;"></i></i> </a>
+                    
+                      <a href="recrutamento.php?idAlt=<?= $colunas['id'] ?>"> <i class="fa-solid fa-pencil mr-2"
                           style="color: #07414d;"></i></a>
                       <a href="<?php echo './recrutamento/excluir.php?id=' . $colunas['id']; ?>"> <i
                           class="fa-solid fa-trash-can" style="color: #970707;"></i></a>
