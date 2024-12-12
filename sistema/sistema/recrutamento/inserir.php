@@ -22,7 +22,7 @@
     /* mover para pasta */
     move_uploaded_file($_FILES['curriculo']['tmp_name'], $localEnvioPasta);
 
-    //script para salvar foto
+    //pega arquivo de foto e verifica se ele é diferente de null(verifica se existe)
     if($pasta_img . ($_FILES["foto"]["name"]) != null) {
 
     // Pasta de destino para uploads (usando caminho relativo)
