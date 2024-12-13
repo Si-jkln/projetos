@@ -4,11 +4,11 @@
 
     $id = $_REQUEST['id'];
 
-    $sql = "DELETE FROM cidade WHERE id='$id' ";
+    $sql = "DELETE FROM recrutamento WHERE id='$id' ";
 
     $resultado = mysqli_query($conexao, $sql);
 
-    header('location:../cidade.php');
+    header('location:../recrutamento.php');
 
                                                                 
 ?>

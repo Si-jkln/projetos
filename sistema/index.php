@@ -34,6 +34,8 @@
             </div>
 
             <button type="submit" class="btn btn-outline-info color">Logar</button>
+
+            <a href="./cadastroCurriculo.php" class="btn ml-5 enviar" style="color:darkred;">Trabalhe conosco</a>
         </form>
 
     </div> <!-- div de login -->

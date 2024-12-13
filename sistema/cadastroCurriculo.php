@@ -2,7 +2,6 @@
 <html lang="pr-br">
 <?php
 
-include "validacao.php";
 include "conexao.php";
 
 //destino do formulário
@@ -47,29 +46,17 @@ if (!empty($_GET['idAlt'])) {
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-2 menu">
-
-       <?php include './menuLateral.php'; ?>
-       
-      </div>
-
-
-      <div class="col-md-10">
+      
+      <div class="container">
 
         <div class="row">
 
-          <div class="col-md-6 card">
-            <h3>Cadastro</h3>
+          <div class="col-md-12 card">
+            <h3>Cadastre seu currículo</h3>
 
             <form action="<?= $destino ?>" method="post" class="row" enctype="multipart/form-data">
 
-              <div class="form-group col-md-2">
-                <label>ID: </label>
-                <input readonly value="<?php echo isset($dadosAlt) ? $dadosAlt['id'] : '' ?>" type="text" name="id"
-                  class="form-control" placeholder="Seu ID">
-              </div>
-
-              <div class="form-group col-md-10">
+              <div class="form-group col-md-12">
                 <label>Nome: </label>
                 <input value="<?php echo isset($dadosAlt) ? $dadosAlt['nome'] : '' ?>" type="text" name="nome" required
                   class="form-control" placeholder="Seu Nome">
@@ -131,58 +118,9 @@ if (!empty($_GET['idAlt'])) {
               </div>
 
 
-              <button type="submit" class="btn btn-outline-info color ml-3 mb-3"> Salvar </button>
+              <button type="submit" class="btn btn-outline-info color ml-3 mb-3"> Enviar </button>
             </form>
 
-          </div>
-
-          <div class="col-md-5 card">
-            <table class="table table-striped table-bordered" id="tabela">
-              <thead>
-                <tr>
-                  <th scope="col">Foto</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Data</th>
-                  <th scope="col">Horá de ínicio</th>
-                  <th scope="col">Opções</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <?php
-
-                $sql = 'SELECT * FROM recrutamento';
-                $resultado = mysqli_query($conexao, $sql);
-
-                //looping que vai imprimar cada pessoa na tabela
-                while ($colunas = mysqli_fetch_assoc($resultado)) {
-
-                  ?>
-
-                  <tr>
-                    <th scope="row"> <img src="<?php echo $colunas['foto'] ?>" width="80"> </th>
-                    <td> <?php echo $colunas['nome'] ?></td>
-
-                    <td> <?php 
-                      $data = new DateTime($colunas['data_entrevista']);
-                      echo $data->format('d/m/Y')
-                    ?></td>
-
-                    <td> <?php echo $colunas['hora_inicio'] ?></td>
-                    <td>
-                      <a target="_blanck" href="<?php echo $colunas['curriculo']?>"> <i class="fa-regular fa-file-pdf fa-lg mr-2"></i> </a>
-                      <a download href="<?php echo $colunas['curriculo']?>"> <i class="fa-solid fa-download mr-2" style="color: #1d861f;"></i></i> </a>
-                    
-                      <a href="recrutamento.php?idAlt=<?= $colunas['id'] ?>"> <i class="fa-solid fa-pencil mr-2"
-                          style="color: #07414d;"></i></a>
-                      <a href="<?php echo './recrutamento/excluir.php?id=' . $colunas['id']; ?>"> <i
-                          class="fa-solid fa-trash-can" style="color: #970707;"></i></a>
-                    </td>
-                  </tr>
-                <?php } ?>
-
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
